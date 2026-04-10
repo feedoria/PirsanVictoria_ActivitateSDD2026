@@ -1,0 +1,8 @@
+1,9,12.0,GridInventorySystem,Grid based inventory with item rotation and stacking,G
+2,8,8.5,RaycastInteractionSystem,Interact with objects using raycast from camera,I
+3,7,6.0,PickupDropSystem,Pick up and drop items in the world,I
+4,9,10.0,ShelfPlacementSystem,Place items on shelves using grid snapping,G
+5,8,9.0,ContainerSystem,Store items inside crates with spatial logic,G
+6,7,5.5,ItemDataSystem,Scriptable object style item definitions,G
+7,10,14.0,AutoSortInventorySystem,Automatically arrange items using greedy algorithm,G
+8,6,4.0,HighlightHoverSystem,Highlight objects when player looks at them,I
