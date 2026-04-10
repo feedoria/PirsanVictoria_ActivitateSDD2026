@@ -1,0 +1,5 @@
+1,20,45.5,Fireball,Burns target,F
+2,15,30.0,IceSpike,Slows enemy,I
+3,25,60.0,LightningStrike,Instant electric hit,L
+4,10,18.5,WindBlade,Cuts enemy with air,W
+5,35,90.0,MeteorRain,Massive area damage,F
