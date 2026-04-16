@@ -7,56 +7,24 @@
 //sau va creati un alt fisier cu alte date
 
 /*
+BRIEF TEORETIC
 
-BRIEF TEORETIC:
+STACK:
+LIFO = Last In First Out
 
-HASHTABLE:
+Operații de bază
+push → adaugă element în vârf
+pop → scoate element din vârf
+top → vezi elementul din vârf (fără să-l scoți)
+empty → verifică dacă e goală
 
-HashTable = structura care iti permite sa gasesti foarte rapid un element dupa o cheie
+QUEUE:
+FIFO = First In First Out
 
-Functia de Hash -> cea mai importanta:
-index = hash(cheie) % dimensiune
-
-exemple:
-- pt int:
-int hash(int id, int dim) {
-	return id % dim;
-}
-
--pt string:
-int hash(char* nume, int dim) {
-	int suma = 0;
-	for (int i = 0; i < strlen(nume); i++) {
-		suma += nume[i];
-	}
-	return suma % dim;
-}
-
-PROBLEMA: 
-- coliziuni
-- le rez cu liste -> fiecare poz din vector contine o lista
-
-OPERATII DE BAZA:
-Inserare:
-	1. calculezi hash
-	2. mergi la pozitie
-	3. adaugi în lista
-Stergere:
-	1. calculezi hash
-	2. mergi la lista
-	3. stergi din lista
-Cautare:
-	1. calculezi hash
-	2. mergi la pozitie
-	3. cauti în lista
-
-Complexitate: best case O(1) worst case O(n)
-
-Analogie simpla
-	 HashTable = catalog de biblioteca
-
-	 nu cauti cartea prin toata biblioteca
-	 folosesti indexul → mergi direct la raft
+Operații de bază
+enqueue → adaugă la final
+dequeue → scoate de la început
+front → vezi primul element
 */
 
 struct StructuraMasina {
@@ -68,21 +36,6 @@ struct StructuraMasina {
 	unsigned char serie;
 };
 typedef struct StructuraMasina Masina;
-
-//creare structura pentru un nod dintr-o lista simplu inlantuita
-
-//creare structura pentru tabela de dispersie
-// aceasta este un vector de liste
-
-
-//STACK
-//Alegeti prin ce veti reprezenta stiva si creati structura necesara acestei stive
-//putem reprezenta o stiva prin LSI, LDI sau vector
-
-struct HashTable {
-	int dim;
-};
-typedef struct HashTable HashTable;
 
 Masina citireMasinaDinFisier(FILE* file) {
 	char buffer[100];
@@ -115,62 +68,317 @@ void afisareMasina(Masina masina) {
 	printf("Serie: %c\n\n", masina.serie);
 }
 
-void afisareListaMasini(/*lista de masini*/) {
-	//afiseaza toate elemente de tip masina din lista dublu inlantuita
-	//prin apelarea functiei afisareMasina()
+//STACK
+//Alegeti prin ce veti reprezenta stiva si creati structura necesara acestei stive
+//putem reprezenta o stiva prin LSI, LDI sau vector
+
+struct NodSimplu
+{
+	Masina masina;
+	struct NodSimplu* next;
+};
+
+void pushStack(/*stiva*/struct NodSimplu** stack, Masina masina) {
+	struct NodSimplu* nou = malloc(sizeof(struct NodSimplu));
+	nou->masina = masina;
+	nou->next = *stack;
+
+	*stack = nou;
+	// top ul stackului este inceputul listei
 }
 
-void adaugaMasinaInLista(/*lista de masini*/ Masina masinaNoua) {
-	//adauga la final in lista primita o noua masina pe care o primim ca parametru
+Masina popStack(/*stiva*/struct NodSimplu** stack) {
+	Masina masina;
+	masina.id = -1;
+
+	if (*stack == NULL)
+	{
+		return masina;
+	}
+
+	struct NodSimplu* ultimulNod = *stack;
+	masina = ultimulNod->masina;
+	*stack = (*stack)->next;
+	free(ultimulNod);
+
+	return masina;
 }
 
-
-HashTable initializareHashTable(int dimensiune) {
-	HashTable ht;
-	//initializeaza vectorul de liste si seteaza fiecare lista ca fiind NULL;
-	return ht;
+int emptyStack(/*stiva*/struct NodSimplu* stack) {
+	return !stack;
 }
 
-int calculeazaHash(/*atribut al masini pentru clusterizare*/ int dimensiune) {
-	// este calculat hash-ul in functie de dimensiunea tabelei si un atribut al masinii
-}
-
-void inserareMasinaInTabela(HashTable hash, Masina galerie) {
-	//este folosit mecanismul CHAINING
-	//este determinata pozitia si se realizeaza inserarea pe pozitia respectiva
-}
-
-HashTable citireMasiniDinFisier(const char* numeFisier) {
+void* citireStackMasiniDinFisier(const char* numeFisier) {
 	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
 	//prin apelul repetat al functiei citireMasinaDinFisier()
-	// aceste masini sunt inserate intr-o tabela de dispersie initializata aici
 	//ATENTIE - la final inchidem fisierul/stream-ul
+	FILE* file = fopen(numeFisier, "r");
+	struct NodSimplu* stack = NULL;
+
+	while (!feof(file))
+	{
+		Masina masina = citireMasinaDinFisier(file);
+		pushStack(&stack, masina);
+	}
+	fclose(file);
+
+	return stack;
 }
 
-void afisareTabelaDeMasini(HashTable ht) {
-	//sunt afisate toate masinile cu evidentierea clusterelor realizate
+void dezalocareStivaDeMasini(/*stiva*/struct NodSimplu** stack) {
+	//sunt dezalocate toate masinile si stiva de elemente
+	struct NodSimplu* current = *stack;
+
+	while (current)
+	{
+		struct NodSimplu* temp = current;
+
+		current = current->next;
+
+		free(temp->masina.numeSofer);
+		free(temp->masina.model);
+		free(temp);
+	}
+
+	*stack = NULL;
 }
 
-void dezalocareTabelaDeMasini(HashTable *ht) {
-	//sunt dezalocate toate masinile din tabela de dispersie
+int size(/*stiva*/struct NodSimplu* stack) {
+	//returneaza numarul de elemente din stiva
+	struct NodSimplu* current = stack;
+	int nr = 0;
+	while (current)
+	{
+		nr++;
+		current = current->next;
+	}
+	return nr;
 }
 
-float* calculeazaPreturiMediiPerClustere(HashTable ht, int* nrClustere) {
-	//calculeaza pretul mediu al masinilor din fiecare cluster.
-	//trebuie sa returnam un vector cu valorile medii per cluster.
-	//lungimea vectorului este data de numarul de clustere care contin masini
-	return NULL;
+//QUEUE
+//Alegeti prin ce veti reprezenta coada si creati structura necesara acestei cozi
+//putem reprezenta o coada prin LSI, LDI sau vector
+
+struct Nod
+{
+	Masina masina;
+	struct Nod* prev;
+	struct Nod* next;
+};
+
+struct Queue
+{
+	struct Nod* start;
+	struct Nod* end;
+};
+
+void enqueue(struct Queue* queue, Masina masina) {
+	// adauga o masina in coada
+	struct Nod* nou = malloc(sizeof(struct Nod));
+	nou->masina = masina;
+	nou->next = NULL;
+	nou->prev = queue->end;
+
+	if (queue->end != NULL)
+	{
+		queue->end->next = nou;
+	}
+	else
+	{
+		queue->start = nou;
+	}
+
+	queue->end = nou;
 }
 
-Masina getMasinaDupaCheie(HashTable ht /*valoarea pentru masina cautata*/) {
-	Masina m;
-	//cauta masina dupa valoarea atributului cheie folosit in calcularea hash-ului
-	//trebuie sa modificam numele functiei 
-	return m;
+Masina dequeue(/*coada*/struct Queue* queue) {
+	//extrage o masina din coada
+	Masina masina;
+	masina.id = -1;
+
+	//verificam daca lista e goala si daca e returnam val default
+	if (queue->start == NULL)
+	{
+		return masina;
+	}
+
+	//daca nu e goala retinem startul si masina din el si verificam daca asta e singurul nod si refacem
+	//legatura apoi eliberam memoria nodului pe care l am scos din coada si returnam masina scoasa 
+	struct Nod* nod = queue->start;
+
+	masina = nod->masina;
+
+	queue->start = queue->start->next;
+
+	if (queue->start == NULL)
+	{
+		queue->end = NULL;
+	}
+
+	free(nod);
+
+	return masina;
 }
+
+struct Queue* citireCoadaDeMasiniDinFisier(const char* numeFisier) {
+	//functia primeste numele fisierului, il deschide si citeste toate masinile din fisier
+	//prin apelul repetat al functiei citireMasinaDinFisier()
+	//ATENTIE - la final inchidem fisierul/stream-ul
+	FILE* file = fopen(numeFisier, "r");
+	struct Queue* queue = (struct Queue*)malloc(sizeof(struct Queue));
+	queue->start = NULL;
+	queue->end = NULL;
+
+	while (!feof(file))
+	{
+		enqueue(queue, citireMasinaDinFisier(file));
+	}
+	fclose(file);
+
+	return queue;
+}
+
+void dezalocareCoadaDeMasini(/*coada*/struct Queue* queue) {
+	//sunt dezalocate toate masinile si coada de elemente
+	struct Nod* current = queue->start;
+
+	while (current != NULL)
+	{
+		struct Nod* temp = current;
+
+		current = current->next;
+
+		free(temp->masina.model);
+		free(temp->masina.numeSofer);
+		free(temp);
+	}
+
+	queue->start = NULL;
+	queue->end = NULL;
+}
+
+
+//metode de procesare
+
+float calculeazaPretTotal(struct NodSimplu* stack)
+{
+	struct NodSimplu* current = stack;
+
+	float suma = 0;
+
+	while (current)
+	{
+		suma += current->masina.pret;
+		current = current->next;
+	}
+
+	return suma;
+}
+
+Masina getMasinaByID(struct Queue queue, int id)
+{
+	Masina masina;
+	masina.id = -1;
+
+	if (queue.start == NULL) return masina;
+
+	struct Nod* current = queue.start;
+	masina = current->masina;
+
+	while (current != NULL)
+	{
+		if (id == current->masina.id)
+		{
+			//masina = dequeue(&queue, current->masina);
+			masina = current->masina;
+		}
+		current = current->next;
+	}
+
+	return masina;
+}
+
+/*
+REGULA INVATATA 
+queue        = Queue*
+&queue       = Queue**
+*/
 
 int main() {
+	struct Queue* queue = citireCoadaDeMasiniDinFisier("masini.txt");
 
+	if (queue == NULL)
+	{
+		printf("Fisierul nu a putut fi deschis.\n");
+		return 0;
+	}
 
+	// afisare coada initiala
+	printf("COADA INITIALA:\n");
+	struct Nod* current = queue->start;
+
+	while (current != NULL)
+	{
+		afisareMasina(current->masina);
+		current = current->next;
+	}
+
+	// test getMasinaByID
+	Masina masinaGasita = getMasinaByID(*queue, 2);
+	if (masinaGasita.id != -1)
+	{
+		printf("\nMasina gasita dupa ID:\n");
+		afisareMasina(masinaGasita);
+	}
+	else
+	{
+		printf("\nNu exista masina cu acest ID.\n");
+	}
+
+	// test dequeue
+	Masina masinaScoasa = dequeue(queue);
+	if (masinaScoasa.id != -1)
+	{
+		printf("\nMasina scoasa din coada:\n");
+		afisareMasina(masinaScoasa);
+	}
+
+	// afisare dupa dequeue
+	printf("\nCOADA DUPA DEQUEUE:\n");
+	current = queue->start;
+
+	while (current != NULL)
+	{
+		afisareMasina(current->masina);
+		current = current->next;
+	}
+
+	Masina m;
+	m.id = 100;
+	m.nrUsi = 4;
+	m.pret = 5000;
+
+	m.model = malloc(strlen("BMW") + 1);
+	strcpy(m.model, "BMW");
+
+	m.numeSofer = malloc(strlen("Ion") + 1);
+	strcpy(m.numeSofer, "Ion");
+
+	m.serie = 'A';
+
+	enqueue(queue, m);
+
+	// afisare dupa enqueue
+	printf("\nCOADA DUPA ENQUEUE:\n");
+	current = queue->start;
+
+	while (current != NULL)
+	{
+		afisareMasina(current->masina);
+		current = current->next;
+	}
+
+	dezalocareCoadaDeMasini(queue);
+	free(queue);
 	return 0;
 }
