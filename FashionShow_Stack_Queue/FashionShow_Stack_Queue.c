@@ -276,6 +276,8 @@ Model getModelByID(/*stiva sau coada de modele*/struct Queue queue, int id)
 		}
 		current = current->next;
 	}
+
+	return model;
 }
 
 float calculeazaDurataTotala(/*stiva sau coada de modele*/struct NodSimplu* stiva)
@@ -286,6 +288,7 @@ float calculeazaDurataTotala(/*stiva sau coada de modele*/struct NodSimplu* stiv
 	while (current)
 	{
 		durata += current->model.durataWalk;
+		current = current->next;
 	}
 
 	return durata;
