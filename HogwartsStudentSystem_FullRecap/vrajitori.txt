@@ -1,0 +1,8 @@
+1;1;72.5;Harry Potter;Gryffindor;H
+2;1;68.0;Hermione Granger;Gryffindor;V
+3;1;61.0;Draco Malfoy;Slytherin;Y
+4;1;55.5;Luna Lovegood;Ravenclaw;C
+5;1;58.0;Cedric Diggory;Hufflepuff;A
+6;2;79.0;Ginny Weasley;Gryffindor;P
+7;2;64.5;Cho Chang;Ravenclaw;W
+8;3;83.0;Neville Longbottom;Gryffindor;C
