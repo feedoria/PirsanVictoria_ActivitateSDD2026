@@ -1,4 +1,7 @@
+# CLion / JetBrains
 .idea/
+
+# CMake
 cmake-build-*/
 **/cmake-build-*/
 
@@ -7,9 +10,25 @@ CMakeCache.txt
 Makefile
 compile_commands.json
 
+# Visual Studio
+.vs/
+x64/
+Debug/
+Release/
+
+# Build files
 *.out
 *.exe
 *.o
 *.obj
-*.dSYM/
+*.ilk
+*.pdb
+*.tlog
+*.recipe
+*.idb
+*.ipch
+*.suo
+
+# macOS
 .DS_Store
+*.dSYM/
