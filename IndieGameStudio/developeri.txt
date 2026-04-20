@@ -1,0 +1,15 @@
+1;5;9.4;Alex Marin;Gameplay Programmer;Unity
+2;3;8.7;Bianca Ionescu;3D Artist;Unreal
+3;7;9.8;Radu Popa;AI Programmer;Unity
+4;2;7.9;Elena Stan;UI Designer;Godot
+5;6;9.1;Mihai Tudor;Backend Developer;Unreal
+6;4;8.5;Diana Pavel;Level Designer;Unity
+7;8;9.6;Vlad Georgescu;Graphics Programmer;Unreal
+8;1;7.8;Ana Dumitru;QA Tester;Godot
+9;5;8.9;Stefan Matei;Tools Programmer;Unity
+10;3;8.3;Ioana Rusu;Sound Designer;Godot
+11;9;9.9;Cristian Enache;Lead Programmer;Unreal
+12;2;7.6;Maria Nistor;Intern Developer;Unity
+13;6;9.0;Paul Dobre;Network Programmer;Unreal
+14;4;8.4;Teodora Ilie;Animator;Godot
+15;7;9.3;Andrei Vasile;Engine Programmer;Unity
