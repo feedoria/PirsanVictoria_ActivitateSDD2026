@@ -1,0 +1,5 @@
+1;Schimb Anvelope;Ionescu Vlad;350.5;45
+2;Revizie Motor;Popescu Ana;1200;180
+3;Diagnoza Electronica;Ionescu Vlad;250;35
+4;Schimb Ulei;Georgescu Mihai;400;50
+5;Vopsire Bara;Popescu Ana;900;240

@@ -1,0 +1,6 @@
+1;Dr.Popescu;Paracetamol;120.5;10
+2;Dr.Ionescu;Nurofen;85.0;15
+3;Dr.Popescu;Paracetamol;60.0;5
+4;Dr.Georgescu;Augmentin;210.0;20
+5;Dr.Ionescu;Nurofen;95.0;12
+6;Dr.Popescu;Aerius;75.0;8

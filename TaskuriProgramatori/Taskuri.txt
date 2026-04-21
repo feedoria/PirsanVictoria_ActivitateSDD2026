@@ -1,0 +1,6 @@
+1;Fix login bug;Andrei;3.5;2
+2;Implement inventory;Maria;8.0;5
+3;Refactor player movement;Andrei;4.0;3
+4;Optimize database calls;Teodora;6.5;4
+5;Add dark mode;Maria;2.0;1
+6;Repair save system;Andrei;7.0;5
