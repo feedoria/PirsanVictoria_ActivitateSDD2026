@@ -1,0 +1,6 @@
+1,300,Mara Ionescu,450.5
+2,120,Alex Popescu,320.0
+3,500,Teo Dumitrescu,610.75
+4,80,Irina Stan,280.0
+5,200,Vlad Marinescu,390.25
+6,420,Ana Petrescu,530.0

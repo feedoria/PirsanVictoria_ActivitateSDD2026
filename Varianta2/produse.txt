@@ -1,0 +1,3 @@
+1, 1001, Laptop Asus, 3500.50, Electronice
+2, 1005, Mouse Logitech, 180.00, Periferice
+3, 1003, Monitor Samsung, 899.99, Electronice

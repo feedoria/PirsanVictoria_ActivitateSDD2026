@@ -1,0 +1,6 @@
+1,72,Ionescu Vlad,Infarct,9.8
+2,45,Popescu Ana,Fractura,6.4
+3,81,Dumitrescu Elena,AVC,9.5
+4,29,Marin Radu,Alergie severa,7.2
+5,64,Stan Mihai,Pneumonie,8.1
+6,38,Toma Irina,Migrena,4.3

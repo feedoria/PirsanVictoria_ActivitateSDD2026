@@ -1,0 +1,5 @@
+1,92.5,Electric Saints,Techno,A
+2,78.0,Velvet Noise,Alternative,B
+3,96.2,Neon Pulse,EDM,A
+4,84.7,Midnight Echo,Darkwave,C
+5,88.9,Crystal Static,Synthpop,B
