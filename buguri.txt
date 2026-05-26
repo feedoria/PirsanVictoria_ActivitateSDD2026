@@ -1,0 +1,5 @@
+1,3.5,Player falls through map,Mara,5
+2,1.2,Music stops after pause,Alex,2
+3,4.0,Inventory duplicates items,Teo,4
+4,6.5,Boss does not spawn,Mara,5
+5,2.0,Settings are not saved,Alex,3

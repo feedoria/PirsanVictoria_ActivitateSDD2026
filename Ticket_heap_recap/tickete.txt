@@ -1,0 +1,6 @@
+1,9.5,Server down
+2,4.2,UI bug
+3,7.8,Payment error
+4,2.1,Text typo
+5,8.6,Login crash
+6,5.5,Slow loading

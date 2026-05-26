@@ -1,0 +1,6 @@
+1,TAROM,301,2.5,Paris
+2,WizzAir,105,1.8,Roma
+3,Lufthansa,450,3.2,Berlin
+4,Ryanair,210,2.1,Madrid
+5,AirFrance,390,2.9,Paris
+6,KLM,520,3.6,Amsterdam
